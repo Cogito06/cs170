@@ -1,24 +1,24 @@
 ---
-id: 2026-09-15-change-model-vs-change-algorithm
 course: cs170
-concepts: [计算模型, computational model, 分治, divide and conquer, Karatsuba, FFT, 整数乘法, integer multiplication, 渐近复杂度, asymptotic complexity]
+cluster: 整数乘法能多快
+date: 2026-09-15
+concepts: [计算模型, computational model, Karatsuba, FFT, 整数乘法, 分治, divide and conquer, integer multiplication, 渐近复杂度, asymptotic complexity]
 hook: 进制/字长/查表属于「改模型」只赚 log，Karatsuba/FFT 属于「改算法」赚指数——n log n 猜错了竖式，却猜中了整数乘法的真实上界
 refs:
   - book/chap1.pdf    # 算术、乘法
   - book/chap2.pdf    # 分治、Karatsuba、FFT（还没读到）
   - slides/lec-1_full.pdf
-status: open
 ---
 
 ## 触发
 
-追问「进制是不是个时空 trade」（[[2026-09-15-base-tradeoff-asymmetry]]）之后的收束。
+追问「进制是不是个时空 trade」（[[base-tradeoff-asymmetry]]）之后的收束。
 这条是前两条的骨架，单独拿出来是因为它能往后挂 ch2 的内容。
 
 ## 卡点 / 误解
 
 猜 `n log n` 的时候以为自己在猜**竖式**的复杂度（错，那是 Θ(n²)，
-见 [[2026-09-15-halve-is-not-log]]）。
+见 [[halve-is-not-log]]）。
 
 但这个数字本身不是凭空来的——它是**另一个问题的正确答案**：
 
@@ -58,4 +58,20 @@ status: open
 
 ## 遗留问题
 
-- [ ] Karatsuba 和 FFT 都还没学（ch2）。学完回来验证「改算法 vs 改模型」这个二分是不是站得住，特别是 FFT——它换的是表示法，算 A 还是 B？
+- [x] ~~学完 ch2 回来验证「改算法 vs 改模型」这个二分站不站得住，特别是 FFT
+      换的是表示法，算 A 还是 B？~~
+
+  **已验证（见 [[karatsuba-cant-reach-balance]]）：二分站得住，但路子 B 内部还要再分一层。**
+
+  FFT 是 B——它赚的是指数、和进制字长无关。但它拿到 `a=2` 的方式和 Karatsuba 完全不同：
+  Karatsuba 是在同一个表示下把递归分支从 4 掰到 3，天平往左推一格但**够不到平衡点
+  `a = b^d = 2`**，所以永远叶重；FFT 的 `(2,2,1)` 正好落在边界，**不是因为它切得更聪明，
+  而是因为它根本没在切同一个问题**——换成点值表示之后卷积变成逐点乘，问题结构变了。
+
+  所以 B 该拆成两层：
+
+  - **B1 减少递归分支**（Karatsuba）——在天平上平移，受 `a` 只能取整数的限制
+  - **B2 换表示法**（FFT）——把问题换成另一个，天平的三个参数整个重新取值
+
+  原来那句收束「进制决定竖式跑多快；分治和 FFT 决定还要不要用竖式」依然成立，
+  只是「分治和 FFT」这两者之间本身还有一道坎。

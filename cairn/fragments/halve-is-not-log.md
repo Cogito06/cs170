@@ -1,12 +1,12 @@
 ---
-id: 2026-09-15-halve-is-not-log
 course: cs170
-concepts: [俄罗斯农夫乘法, Russian Peasant Algorithm, 埃及乘法, Egyptian multiplication, 位数, bit complexity, 竖式乘法, schoolbook multiplication]
+cluster: 整数乘法能多快
+date: 2026-09-15
+concepts: [俄罗斯农夫乘法, Russian Peasant Algorithm, 位数, bit complexity, 竖式乘法, 埃及乘法, Egyptian multiplication, schoolbook multiplication]
 hook: 「每轮减半→log n 层」是归并排序的错误 pattern-match：减半的是值不是问题规模，值减半只砍掉 1 个 bit，所以 n 轮不是 log n 轮
 refs:
   - slides/lec-1_full.pdf   # "Can we do better?" 那页，右下角 At home 那两问
   - book/chap1.pdf
-status: resolved
 ---
 
 ## 触发
@@ -74,7 +74,8 @@ numbers" 已经定死了 n = **位数**，不是数值。如果心里的 n 是�
 
 所以 `T(n) = Θ(n²)`——**和小学竖式完全一样，没有 better**。标题 "Can we do
 better?" 在这里的答案是「这个算法不行」，真正的突破要等分治。
-见 [[2026-09-15-change-model-vs-change-algorithm]]。
+见 [[change-model-vs-change-algorithm]]；具体到分治能走多远、为什么 Karatsuba
+够不到平衡点，见 [[karatsuba-cant-reach-balance]]。
 
 ## 遗留问题
 

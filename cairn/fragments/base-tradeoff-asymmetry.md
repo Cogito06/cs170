@@ -1,16 +1,16 @@
 ---
-id: 2026-09-15-base-tradeoff-asymmetry
 course: cs170
-concepts: [进制, base, radix, 乘法表, 字长, word size, 时空权衡, space-time tradeoff, Four Russians, 乘法器电路, multiplier circuit]
+cluster: 整数乘法能多快
+date: 2026-09-15
+concepts: [进制, base, Four Russians, 字长, 时空权衡, word size, space-time tradeoff, 乘法表, radix, 乘法器电路, multiplier circuit]
 hook: 「大 base = 空间换时间」方向对但兑换率极差：时间按 w² 变好、空间按 4^w 变坏；且 CPU 的 64 位乘法不是查表而是 O(w²) 门的电路
 refs:
   - book/chap1.pdf
-status: open
 ---
 
 ## 触发
 
-问完俄罗斯农夫的复杂度（[[2026-09-15-halve-is-not-log]]）之后追问：
+问完俄罗斯农夫的复杂度（[[halve-is-not-log]]）之后追问：
 「进制对于做乘法很关键？」，然后自己提了个框架——
 **base 只是决定乘法表多大、什么东西可以 O(1) 查，本质是个空间时间的 trade？**
 
@@ -69,8 +69,13 @@ Wallace tree 乘法器就是把竖式布线成硬件。**那个 O(1) 原语是�
 **Four Russians 方法**（布尔矩阵乘法等地方也用）。
 
 但注意它**只赚到 log 因子**，跟 Karatsuba 的 `n^1.585` 完全不是一个量级——
-这正是 [[2026-09-15-change-model-vs-change-algorithm]] 里「改模型」那条路的天花板。
+这正是 [[change-model-vs-change-algorithm]] 里「改模型」那条路的天花板。
 
 ## 遗留问题
 
-- [ ] Four Russians 用在整数乘法上给出 n²/log²n 这个结论，是当场自己数出来的，没核对过文献。回头查一下标准出处和确切形式。
+- [ ] Four Russians 给出 n²/log²n：**推导已复核，形式没错**——取 w = ½log₂n，
+      表大小 4^w = 4^(½log₂n) = 2^(log₂n) = n 条目（多项式空间），
+      时间 n²/w² = Θ(n²/log²n)。
+      **还缺出处**：「Four Russians」原指 Arlazarov–Dinitz–Kronrod–Faradzhev 1970
+      那篇做传递闭包 / 布尔矩阵乘法的文章，把同一个查表技巧用到整数乘法上、
+      并明确写出 n²/log²n 的标准引文还没找到。
