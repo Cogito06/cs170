@@ -12,13 +12,13 @@ public class MergeSortLauncher {
         }
     }
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         int toBeSorted[] = new int[]{10, 2, 5, 3, 7, 1, 6};
-        int expected[] = MergeSort.MergeSort(toBeSorted);
+        int result[] = MergeSort.MergeSort(toBeSorted);
 
         System.out.println("The original array is:");
         MergeSortLauncher.printArray(toBeSorted);
         System.out.println("The sorted array is:");
-        MergeSortLauncher.printArray(expected);
+        MergeSortLauncher.printArray(result);
     }
 }

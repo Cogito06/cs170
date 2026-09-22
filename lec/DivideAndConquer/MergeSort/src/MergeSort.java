@@ -2,14 +2,30 @@
  * Merge sort for integer list.
  * sorted list is from small to big.
  */
+
+import java.util.Arrays;
+
 public class MergeSort {
+
+    /**
+     * Recursive mergesort.
+     * @param arr Array to be sorted
+     * @return the sorted wevsion of arr
+     */
     public static int[] MergeSort(int[] arr){
         int[] returnList = new int[arr.length];
-        if(arr.length == 1){
+        if(arr.length <= 1){
             returnList = arr;
         }
         else{
+            int mid = (arr.length) / 2;
+            int arrLeft[] = Arrays.copyOfRange(arr, 0, mid);
+            int arrRight[] = Arrays.copyOfRange(arr, mid, arr.length);
 
+            arrLeft = MergeSort(arrLeft);
+            arrRight = MergeSort(arrRight);
+
+            returnList = Merge(arrLeft, arrRight);
         }
         return returnList;
     }
@@ -20,7 +36,7 @@ public class MergeSort {
      * @param arr2 second sorted array
      * @return a new sorted array containing all elements from arr1 and arr2
      */
-    public static int[] Merge(int[] arr1, int[] arr2){
+    private static int[] Merge(int[] arr1, int[] arr2){
         int size = arr1.length + arr2.length;
         int[] returnArr = new int[size];
 
