@@ -5,6 +5,9 @@
 - [one-inequality-replaces-four-cases] 边分类/edge classification/tree/forward/back/cross/DFS pre/post 引理/有向图 — 自己提的引理漏了 back edge 这一支——四类边分类本质是同一条不等式 pre(v)<post(u) 的四种展开，一步证明就够，不用分 tree/forward/back/cross 讨论 | open:0 | 09-23
 - [undirected-has-no-cross] 无向图边分类/undirected edge classification/back edge/cross edge/tree edge — 以为无向图 cross edge 只是被合并掉、不相交区间还会出现——实际有边相连的两点不相交彻底不可能；不相交只在没有边的两点间才合法，构造 A-B,A-C 不连 B-C 能看到这个边界 | open:0 | 09-23
 
+## 怎么学（1 条）
+- [qa-mode-leaves-no-trail] 学习方式/learning mode/问答模式/苏格拉底式/题梯 — 问答模式下我没挣扎过，所以几乎没有认知轨迹可归档——agent 真正的优势不是知道答案，是知道依赖顺序，该让它出题梯而不是给答案 | open:2 | 09-23
+
 ## 复杂度从哪来（5 条）
 - [cant-escape-the-equation] 特征方程/characteristic equation/Akra-Bazzi/不等分递归/unbalanced divide and conquer — 「猜 an^b」不是走了捷径——换哪条路（特征方程/数叶子/Mellin变换）都会撞回同一个方程 (3/5)^s+(4/5)^s=1；数叶子真正难的地方是路径顺序不独立，不是算不出来 | open:0 | 09-22
 - [karatsuba-cant-reach-balance] 整数乘法/integer multiplication/点值表示/point-value representation/Karatsuba — Karatsuba 把 a 从 4 掰到 3 但够不到平衡点 a=b^d=2，所以永远叶重；FFT 落在边界不是因为切得巧，是因为它换了表示法 | open:1 | 09-15
